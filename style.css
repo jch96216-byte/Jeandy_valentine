@@ -1,0 +1,371 @@
+/* ===== Base ===== */
+:root{
+  --bg1:#071823;
+  --bg2:#0f2a3c;
+  --card:#ffffff;
+  --text:#0f172a;
+  --muted:#5b6476;
+  --accent:#9be15d;
+  --pink:#ff6b81;
+  --pink2:#ff3d6e;
+  --shadow: 0 18px 60px rgba(0,0,0,.35);
+  --radius: 22px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  color: white;
+  overflow-x:hidden;
+}
+
+.wrap{
+  min-height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding: 40px 18px;
+  position:relative;
+  z-index:2;
+}
+
+.top{
+  text-align:center;
+  margin-bottom: 18px;
+}
+
+h1{
+  margin: 0 0 6px;
+  font-size: clamp(34px, 5vw, 56px);
+  letter-spacing: -0.02em;
+}
+
+.accent{ color: var(--accent); }
+
+.sub{
+  margin:0;
+  color: rgba(255,255,255,.82);
+  font-size: 15px;
+}
+
+/* ===== Background ===== */
+.bg{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  background: radial-gradient(1200px 700px at 20% 20%, #183a55 0%, transparent 60%),
+              radial-gradient(900px 600px at 80% 30%, #2a184c 0%, transparent 60%),
+              linear-gradient(160deg, var(--bg1), var(--bg2));
+}
+
+.glow{
+  position:absolute;
+  inset:-40%;
+  background: radial-gradient(circle at 40% 40%, rgba(255,107,129,.18), transparent 55%),
+              radial-gradient(circle at 70% 55%, rgba(155,225,93,.14), transparent 55%);
+  filter: blur(20px);
+  animation: drift 10s ease-in-out infinite alternate;
+}
+
+@keyframes drift{
+  from{ transform: translate(-10px, -10px) scale(1); }
+  to{ transform: translate(10px, 10px) scale(1.04); }
+}
+
+.stars{
+  position:absolute;
+  inset:0;
+  background-image:
+    radial-gradient(rgba(255,255,255,.75) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,.55) 1px, transparent 1px);
+  background-size: 120px 120px, 180px 180px;
+  background-position: 0 0, 40px 60px;
+  opacity:.16;
+  animation: twinkle 6s linear infinite;
+}
+
+@keyframes twinkle{
+  0%{ transform: translateY(0); opacity:.14; }
+  50%{ opacity:.20; }
+  100%{ transform: translateY(10px); opacity:.14; }
+}
+
+/* ===== Card ===== */
+.card{
+  width: min(520px, 92vw);
+  background: rgba(255,255,255,.95);
+  color: var(--text);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 26px 22px 18px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.prompt{
+  margin: 10px 0 4px;
+  font-size: clamp(20px, 3.5vw, 28px);
+  font-weight: 750;
+  letter-spacing:-0.01em;
+}
+
+.hint{
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.btn-row{
+  display:flex;
+  gap: 12px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top: 10px;
+  position:relative;
+  min-height: 54px;
+}
+
+button{
+  border:none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 18px;
+  font-weight: 800;
+  cursor:pointer;
+  transition: transform .12s ease, filter .12s ease;
+  user-select:none;
+}
+
+button:active{ transform: translateY(1px) scale(.99); }
+
+.yes-button{
+  background: linear-gradient(180deg, var(--pink), var(--pink2));
+  color: white;
+  box-shadow: 0 12px 30px rgba(255,61,110,.35);
+}
+
+.yes-button:hover{ filter: brightness(1.03); }
+
+.no-button{
+  background: #e8ecf4;
+  color: #2b3140;
+  box-shadow: 0 10px 24px rgba(15,23,42,.12);
+  position: relative; /* will be moved by JS */
+}
+
+.no-button:hover{ filter: brightness(.98); }
+
+.micro{
+  margin-top: 14px;
+  color: rgba(15,23,42,.65);
+  font-size: 12.5px;
+}
+
+.footer{
+  margin-top: 18px;
+  color: rgba(255,255,255,.7);
+  font-size: 12.5px;
+}
+
+/* ===== Cute sticker (pure CSS) ===== */
+.sticker{
+  width: 150px;
+  height: 110px;
+  margin: 0 auto 4px;
+  position: relative;
+}
+
+.bear{
+  position:absolute;
+  inset: 0;
+  margin:auto;
+  width: 110px;
+  height: 86px;
+  border-radius: 26px;
+  background: #ffe3ea;
+  box-shadow: inset 0 -10px 0 rgba(255,107,129,.12);
+  transform: translateY(4px);
+}
+
+.bear::before, .bear::after{
+  content:"";
+  position:absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: #ffe3ea;
+  top: -10px;
+}
+
+.bear::before{ left: 10px; transform: rotate(-10deg); }
+.bear::after{ right: 10px; transform: rotate(10deg); }
+
+.bear{
+  animation: bob 1.8s ease-in-out infinite;
+}
+
+@keyframes bob{
+  0%,100%{ transform: translateY(6px); }
+  50%{ transform: translateY(0px); }
+}
+
+.sparkles{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255,107,129,.8) 2px, transparent 3px),
+    radial-gradient(circle at 80% 30%, rgba(155,225,93,.7) 2px, transparent 3px),
+    radial-gradient(circle at 55% 10%, rgba(255,255,255,.8) 2px, transparent 3px),
+    radial-gradient(circle at 30% 70%, rgba(255,255,255,.6) 2px, transparent 3px),
+    radial-gradient(circle at 75% 75%, rgba(255,107,129,.55) 2px, transparent 3px);
+  opacity:.7;
+  filter: blur(.2px);
+}
+
+/* ===== YES page sticker ===== */
+.yes-body .wrap{ padding-top: 50px; }
+.yay{
+  margin: 0 0 10px;
+  font-size: clamp(22px, 4vw, 32px);
+  color: #ff3d6e;
+  font-weight: 900;
+}
+
+.yes-card{ padding-top: 22px; }
+
+.kiss{
+  width: 220px;
+  height: 140px;
+  margin: 10px auto 0;
+  position: relative;
+}
+
+.panda, .brown{
+  position:absolute;
+  width: 120px;
+  height: 90px;
+  border-radius: 28px;
+  bottom: 18px;
+}
+
+.panda{
+  left: 78px;
+  background: #ffffff;
+  box-shadow: inset 0 -10px 0 rgba(0,0,0,.04);
+}
+
+.panda::before, .panda::after{
+  content:"";
+  position:absolute;
+  width: 28px; height: 28px;
+  border-radius: 10px;
+  top: -10px;
+  background:#2d2d2d;
+}
+.panda::before{ left: 8px; }
+.panda::after{ right: 8px; }
+
+.brown{
+  left: 30px;
+  background: #f3c8a9;
+  box-shadow: inset 0 -10px 0 rgba(0,0,0,.05);
+  transform: rotate(-2deg);
+}
+
+.brown::before, .brown::after{
+  content:"";
+  position:absolute;
+  width: 28px; height: 28px;
+  border-radius: 10px;
+  top: -10px;
+  background:#f3c8a9;
+}
+.brown::before{ left: 10px; transform: rotate(-8deg); }
+.brown::after{ right: 10px; transform: rotate(8deg); }
+
+.hearts{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 55% 18%, rgba(255,61,110,.9) 3px, transparent 4px),
+    radial-gradient(circle at 45% 10%, rgba(255,61,110,.7) 2px, transparent 3px),
+    radial-gradient(circle at 62% 8%, rgba(255,107,129,.75) 2px, transparent 3px);
+  filter: blur(.2px);
+  animation: floatHearts 1.3s ease-in-out infinite alternate;
+}
+
+@keyframes floatHearts{
+  from{ transform: translateY(2px); opacity:.75; }
+  to{ transform: translateY(-4px); opacity:1; }
+}
+
+/* flying hearts */
+.flying-heart{
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  transform: translate(-50%, -50%);
+  pointer-events:none;
+  z-index: 5;
+}
+.flying-heart::before,
+.flying-heart::after{
+  content:"";
+  position:absolute;
+  width: 8px;
+  height: 12px;
+  background: #ff3d6e;
+  border-radius: 8px 8px 0 0;
+  left: 4px;
+  top: 0;
+  transform: rotate(45deg);
+  transform-origin: 0 100%;
+  opacity:.95;
+}
+.flying-heart::after{
+  left: 0;
+  transform: rotate(-45deg);
+  transform-origin: 100% 100%;
+}
+
+.flying-heart{
+  animation: fly var(--dur, 1.2s) ease-out forwards;
+}
+@keyframes fly{
+  0%{
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100%{
+    transform:
+      translate(calc(-50% + var(--dx, 0px)), calc(-50% - var(--dy, 120px)))
+      rotate(var(--rot, 0deg))
+      scale(0.9);
+    opacity: 0;
+  }
+}
+
+/* link button */
+.link-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 14px 18px;
+  border-radius: 14px;
+  text-decoration:none;
+  font-weight: 800;
+  background: #e8ecf4;
+  color: #2b3140;
+  box-shadow: 0 10px 24px rgba(15,23,42,.12);
+}
+
+/* make it extra nice on small screens */
+@media (max-width: 420px){
+  .card{ padding: 22px 18px 16px; }
+  button, .link-btn{ width: 42vw; max-width: 180px; }
+}
