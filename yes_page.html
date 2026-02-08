@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yay!</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="yes-body">
+  <div class="bg">
+    <div class="glow"></div>
+    <div class="stars"></div>
+  </div>
+
+  <main class="wrap">
+    <section class="card yes-card">
+      <h2 class="yay">Knew you would say yes! 💖</h2>
+
+      <div class="kiss" aria-hidden="true">
+        <div class="panda"></div>
+        <div class="brown"></div>
+        <div class="hearts"></div>
+      </div>
+
+      <p class="prompt" style="margin-top: 14px;">
+        Officially my favorite notification of the day.
+      </p>
+
+      <div class="btn-row" style="margin-top: 18px;">
+        <button class="yes-button" type="button" id="confettiBtn">MORE HEARTS</button>
+        <a class="link-btn" href="index.html">BACK</a>
+      </div>
+
+      <p class="micro" style="margin-top: 14px;">
+        Screenshot this 😌
+      </p>
+    </section>
+
+    <footer class="footer">
+      <span>Happy Valentine’s 💘</span>
+    </footer>
+  </main>
+
+  <script>
+    // simple burst on load + button
+    function burstHearts(x, y, count = 18) {
+      for (let i = 0; i < count; i++) {
+        const heart = document.createElement("div");
+        heart.className = "flying-heart";
+        heart.style.left = x + "px";
+        heart.style.top = y + "px";
+        heart.style.setProperty("--dx", (Math.random() * 240 - 120) + "px");
+        heart.style.setProperty("--dy", (Math.random() * 220 + 40) + "px");
+        heart.style.setProperty("--rot", (Math.random() * 360 - 180) + "deg");
+        heart.style.animationDuration = (0.9 + Math.random() * 0.6) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1700);
+      }
+    }
+
+    // initial center burst
+    window.addEventListener("load", () => {
+      const rect = document.querySelector(".yes-card").getBoundingClientRect();
+      burstHearts(rect.left + rect.width * 0.5, rect.top + rect.height * 0.45, 24);
+    });
+
+    document.getElementById("confettiBtn").addEventListener("click", (e) => {
+      const rect = e.target.getBoundingClientRect();
+      burstHearts(rect.left + rect.width * 0.5, rect.top + rect.height * 0.3, 22);
+    });
+  </script>
+</body>
+</html>
